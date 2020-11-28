@@ -5,11 +5,11 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
 
-  <title>MVC 2do List</title>
+  <title>2DO LIST</title>
 
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/main.min.css">
-  <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
+  <link rel="shortcut icon" href="./img/to-do-list.svg" type="image/x-icon">
 </head>
 <body class="page__body page__body--nojs pt-5 px-4" id="siteBody">
   <script src="./js/nojs.min.js"></script>
@@ -33,30 +33,35 @@
         <form class="p-2" action="https://echo.htmlacademy.ru" method="POST" autocomplete="off">
           <div class="form-row">
             <div class="col-10">
-              <input class="form-control border-0" type="text" name="task" id="taskTextInput" required placeholder="What needs to be done?">
+              <input class="todo-list-container__form-input form-control border-0" type="text" name="task" id="taskTextInput" required placeholder="What needs to be done?">
             </div>
+
             <div class="col-2">
               <button class="form-control btn btn-success font-weight-bold" type="submit" value="submit" name="sbumit">+</button>
             </div>
           </div>
         </form>
       </div>
+
       <ul class="todo-list-container__main todo-list list-unstyled border-top border-bottom mb-0">
         <li class="todo-list__item d-flex p-2 border-bottom d-flex align-items-center">
           <button class="todo-list__item-status-button btn btn-sm rounded-circle border text-success">&#10003;</button>
           <span class="flex-grow-1 px-2" contenteditable="true">first task</span>
           <button class="todo-list__item-remove-button btn text-danger">&#10060;</button>
         </li>
+
         <li class="todo-list__item d-flex p-2 border-bottom d-flex align-items-center">
           <button class="todo-list__item-status-button btn btn-sm rounded-circle border text-success">&#10003;</button>
           <span class="flex-grow-1 px-2" contenteditable="true">second task</span>
           <button class="todo-list__item-remove-button btn text-danger">&#10060;</button>
         </li>
+
         <li class="todo-list__item d-flex p-2 border-bottom d-flex align-items-center">
           <button class="todo-list__item-status-button btn btn-sm rounded-circle border text-success">&#10003;</button>
           <span class="flex-grow-1 px-2" contenteditable="true">third task</span>
           <button class="todo-list__item-remove-button btn text-danger">&#10060;</button>
         </li>
+
         <li class="todo-list__item d-flex p-2 border-bottom d-flex align-items-center">
           <button class="todo-list__item-status-button btn btn-sm rounded-circle border text-success">&#10003;</button>
           <span class="flex-grow-1 px-2" contenteditable="true">fourth task</span>
@@ -66,13 +71,14 @@
 
       <div class="todo-list-container__footer d-flex justify-content-center justify-content-sm-between align-items-center flex-wrap p-3">
         <span class="small text-muted m-2 m-sm-0">
-          <span class="text-danger">4</span> items left
-        </span>
+          <span class="text-danger">4</span> items left</span>
+
         <div>
           <button class="small text-muted btn border m-2 m-sm-0" type="button">All</button>
           <button class="small text-muted btn border m-2 m-sm-0" type="button">Active</button>
           <button class="small text-muted btn border m-2 m-sm-0" type="button">Complated</button>
         </div>
+
         <button class="small text-muted btn border m-2 m-sm-0">Clear completed</button>
       </div>
     </div>
