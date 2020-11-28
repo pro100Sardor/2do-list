@@ -13,3 +13,15 @@
 .page__title {
   opacity: 0.1;
 }
+
+@include breakpoint-down(500px) {
+  .page__title {
+    font-size: 4rem;
+  }
+}
+
+@include breakpoint-down(350px) {
+  .page__title {
+    font-size: 3rem;
+  }
+}

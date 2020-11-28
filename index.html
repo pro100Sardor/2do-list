@@ -11,13 +11,15 @@
   <link rel="stylesheet" href="./css/main.min.css">
   <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
 </head>
-<body class="page__body page__body--nojs pt-5" id="siteBody">
+<body class="page__body page__body--nojs pt-5 px-4" id="siteBody">
   <script src="./js/nojs.min.js"></script>
+
+  <h1 class="sr-only">An online list of things you need to do, your grateful helper</h1>
 
   <!-- HEADER part of page started -->
 
   <header class="page__header">
-    <h1 class="page__title display-3 text-danger text-center">2DO LIST</h1>
+    <h2 class="page__title display-3 text-danger text-center">2DO LIST</h2>
   </header>
 
   <!-- HEADER part of page ended -->
@@ -61,28 +63,22 @@
           <button class="todo-list__item-remove-button btn text-danger">&#10060;</button>
         </li>
       </ul>
-      <div class="todo-list-container__footer d-flex justify-content-between align-items-center p-3">
-        <span class="small text-muted">
+
+      <div class="todo-list-container__footer d-flex justify-content-center justify-content-sm-between align-items-center flex-wrap p-3">
+        <span class="small text-muted m-2 m-sm-0">
           <span class="text-danger">4</span> items left
         </span>
         <div>
-          <button class="small text-muted btn" type="button">All</button>
-          <button class="small text-muted btn" type="button">Active</button>
-          <button class="small text-muted btn" type="button">Complated</button>
+          <button class="small text-muted btn border m-2 m-sm-0" type="button">All</button>
+          <button class="small text-muted btn border m-2 m-sm-0" type="button">Active</button>
+          <button class="small text-muted btn border m-2 m-sm-0" type="button">Complated</button>
         </div>
-        <button class="small text-muted btn">Clear completed</button>
+        <button class="small text-muted btn border m-2 m-sm-0">Clear completed</button>
       </div>
     </div>
   </main>
 
   <!-- MAIN part of page ended -->
-
-
-  <!-- FOOTER part of page started -->
-
-  <footer></footer>
-
-  <!-- FOOTER part of page ended -->
 
   <div class="disabled-script-info container my-5 rounded py-3 px-2 bg-danger text-white text-center">
     Javascript application feature is disabled in your browser, please <a class="text-white font-weight-bold disabled-script-info__js-on-manual" href="https://www.enable-javascript.com/" target="_blank">enable javascript</a> to use the site
