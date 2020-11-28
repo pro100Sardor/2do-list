@@ -1,7 +1,15 @@
+.page__body {
+  background-color: #f5f5f5;
+}
+
 .page__main {
   flex-grow: 1;
 }
 
 .page__body--nojs .page__main {
   display: none;
+}
+
+.page__title {
+  opacity: 0.5;
 }

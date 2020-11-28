@@ -5,25 +5,56 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
   <meta http-equiv="X-UA-Compatible" content="IE=EmulateIE8">
 
-  <title></title>
+  <title>MVC 2do List</title>
 
   <link rel="stylesheet" href="./css/bootstrap.min.css">
   <link rel="stylesheet" href="./css/main.min.css">
   <!-- <link rel="shortcut icon" href="favicon.ico" type="image/x-icon"> -->
 </head>
-<body class="page__body page__body--nojs" id="siteBody">
+<body class="page__body page__body--nojs pt-5" id="siteBody">
   <script src="./js/nojs.min.js"></script>
 
   <!-- HEADER part of page started -->
 
-  <header></header>
+  <header class="page__header">
+    <h1 class="page__title display-3 text-danger text-center">2DO LIST</h1>
+  </header>
 
   <!-- HEADER part of page ended -->
 
 
   <!-- MAIN part of page started -->
 
-  <main class="page__main"></main>
+  <main class="page__main">
+    <div class="todo-list-container mx-auto rounded">
+      <div class="todo-list-container__header">
+        <form action="https:echo.htmlacdemy.ru" method="POST" autocomplete="off">
+          <div class="form-row">
+            <div class="col-10">
+              <input class="form-control border-0" type="text" name="task" id="taskTextInput" required placeholder="What needs to be done?">
+            </div>
+            <div class="col-2">
+              <button class="form-control btn btn-success font-weight-bold" type="submit" value="submit" name="sbumit">+</button>
+            </div>
+          </div>
+        </form>
+      </div>
+      <ul class="todo-list-container__main list-unstyled">
+        <li><span>complated</span><span>first task</span></li>
+        <li><span>complated</span><span>second task</span></li>
+        <li><span>complated</span><span>third task</span></li>
+        <li><span>complated</span><span>fourth task</span></li>
+      </ul>
+      <div class="todo-list-container__footer">
+        <span>
+          <span>4</span>items left
+        </span>
+        <button type="button">All</button>
+        <button type="button">Active</button>
+        <button type="button">Complated</button>
+      </div>
+    </div>
+  </main>
 
   <!-- MAIN part of page ended -->
 
