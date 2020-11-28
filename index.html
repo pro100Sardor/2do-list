@@ -25,10 +25,10 @@
 
   <!-- MAIN part of page started -->
 
-  <main class="page__main">
-    <div class="todo-list-container mx-auto rounded">
+  <main class="page__main mt-3">
+    <div class="todo-list-container mx-auto rounded shadow">
       <div class="todo-list-container__header">
-        <form action="https:echo.htmlacdemy.ru" method="POST" autocomplete="off">
+        <form class="p-2" action="https://echo.htmlacademy.ru" method="POST" autocomplete="off">
           <div class="form-row">
             <div class="col-10">
               <input class="form-control border-0" type="text" name="task" id="taskTextInput" required placeholder="What needs to be done?">
@@ -39,19 +39,38 @@
           </div>
         </form>
       </div>
-      <ul class="todo-list-container__main list-unstyled">
-        <li><span>complated</span><span>first task</span></li>
-        <li><span>complated</span><span>second task</span></li>
-        <li><span>complated</span><span>third task</span></li>
-        <li><span>complated</span><span>fourth task</span></li>
+      <ul class="todo-list-container__main todo-list list-unstyled border-top border-bottom mb-0">
+        <li class="todo-list__item d-flex p-2 border-bottom d-flex align-items-center">
+          <button class="todo-list__item-status-button btn btn-sm rounded-circle border text-success">&#10003;</button>
+          <span class="flex-grow-1 px-2" contenteditable="true">first task</span>
+          <button class="todo-list__item-remove-button btn text-danger">&#10060;</button>
+        </li>
+        <li class="todo-list__item d-flex p-2 border-bottom d-flex align-items-center">
+          <button class="todo-list__item-status-button btn btn-sm rounded-circle border text-success">&#10003;</button>
+          <span class="flex-grow-1 px-2" contenteditable="true">second task</span>
+          <button class="todo-list__item-remove-button btn text-danger">&#10060;</button>
+        </li>
+        <li class="todo-list__item d-flex p-2 border-bottom d-flex align-items-center">
+          <button class="todo-list__item-status-button btn btn-sm rounded-circle border text-success">&#10003;</button>
+          <span class="flex-grow-1 px-2" contenteditable="true">third task</span>
+          <button class="todo-list__item-remove-button btn text-danger">&#10060;</button>
+        </li>
+        <li class="todo-list__item d-flex p-2 border-bottom d-flex align-items-center">
+          <button class="todo-list__item-status-button btn btn-sm rounded-circle border text-success">&#10003;</button>
+          <span class="flex-grow-1 px-2" contenteditable="true">fourth task</span>
+          <button class="todo-list__item-remove-button btn text-danger">&#10060;</button>
+        </li>
       </ul>
-      <div class="todo-list-container__footer">
-        <span>
-          <span>4</span>items left
+      <div class="todo-list-container__footer d-flex justify-content-between align-items-center p-3">
+        <span class="small text-muted">
+          <span class="text-danger">4</span> items left
         </span>
-        <button type="button">All</button>
-        <button type="button">Active</button>
-        <button type="button">Complated</button>
+        <div>
+          <button class="small text-muted btn" type="button">All</button>
+          <button class="small text-muted btn" type="button">Active</button>
+          <button class="small text-muted btn" type="button">Complated</button>
+        </div>
+        <button class="small text-muted btn">Clear completed</button>
       </div>
     </div>
   </main>
