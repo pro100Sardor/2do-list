@@ -44,7 +44,7 @@
       </header>
 
       <!-- TODO - todo tasks should be performed using toast -->
-      <ul class="todo-list-container__main todo-list list-unstyled border-top border-bottom mb-0">
+      <ul id="todoList" class="todo-list-container__main todo-list list-unstyled border-top border-bottom mb-0">
         <!-- todo tasks are placed here -->
       </ul>
 
@@ -71,10 +71,10 @@
   </div>
 
   <template id="todoTaskTemplate">
-    <li class="todo-list__item d-flex p-2 border-bottom align-items-center">
-      <button class="todo-list__item-status-button btn btn-sm rounded-circle border text-success">&#10003;</button>
-      <span class="todo-task-text flex-grow-1 px-2" contenteditable="true">first task</span>
-      <button class="todo-list__item-remove-button btn text-danger">&#10060;</button>
+    <li class="todo-list__item d-flex p-2 border-bottom align-items-center js-todo-list-item">
+      <button class="todo-list__item-status-button btn btn-sm rounded-circle border text-success mr-2">&#10003;</button>
+      <span class="todo-list__item-text flex-grow-1 mr-2 rounded p-2 js-todo-task-text" contenteditable="true" spellcheck="false">first task</span>
+      <button class="todo-list__item-remove-button btn text-danger js-todo-item-remove-button">&#10060;</button>
     </li>
   </template>
 

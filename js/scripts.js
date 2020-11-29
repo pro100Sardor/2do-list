@@ -1,4 +1,3 @@
-
 /**********************************************************************************\
   *
   *  Briefly about the contents of the file
@@ -28,7 +27,8 @@ var todoTasks = [];
 
 var elTodoTaskAddForm = $_('#todoTaskAddForm');
 var elTodoTaskInput = $_('#todoTaskInput', elTodoTaskAddForm);
-var elTodoList = $_('.todo-list');
+var elTodoList = $_('#todoList');
+var elTodoListItem = $_('.js-todo-list-item', elTodoList);
 
 var elTodoTaskCounter = $_('#todoTaskCounter');
 
@@ -42,10 +42,18 @@ var elTodoTaskTemplate = $_('#todoTaskTemplate').content;
  *
 \**********************************************************/
 
-function addUserInputTasksArray(todoTask) {
-  elTodoTaskInput.value = '';
+function createTodoTask(id, content) {
+  return {
+    id: id,
+    content: content,
+    status: "unfulfilled"
+  }
+}
 
-  return todoTasks.push(todoTask);
+function addUserInputTasksArray(todoTask) {
+  var todoTaskID = todoTasks.length + 1;
+  todoTasks.push(createTodoTask(todoTaskID, todoTask));
+  elTodoTaskInput.value = '';
 }
 
 function addTodoTasksToTasksList(tasks) {
@@ -54,7 +62,7 @@ function addTodoTasksToTasksList(tasks) {
   tasks.forEach(function (task) {
     var elTask = elTodoTaskTemplate.cloneNode(true);
 
-    $_('.todo-task-text', elTask).textContent = task;
+    $_('.js-todo-task-text', elTask).textContent = task.content;
 
     elTodoTasksFragment.appendChild(elTask);
   });
@@ -74,7 +82,7 @@ function addTodoTasksToTasksList(tasks) {
 
 elTodoTaskCounter.textContent = 0;
 
-elTodoTaskAddForm.addEventListener('submit', function (evt) {
+elTodoTaskAddForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
 
   var todoTask = elTodoTaskInput.value.trim();
@@ -82,8 +90,15 @@ elTodoTaskAddForm.addEventListener('submit', function (evt) {
     return;
   }
 
-  var todoTaskCounter = addUserInputTasksArray(todoTask);
-  elTodoTaskCounter.textContent = todoTaskCounter;
+  addUserInputTasksArray(todoTask);
+
+  elTodoTaskCounter.textContent = todoTasks.length;
 
   addTodoTasksToTasksList(todoTasks);
+});
+
+elTodoListItem.addEventListener('click', (evt) => {
+  if (evt.target.matches('js-todo-item-remove-button')) {
+
+  }
 });
