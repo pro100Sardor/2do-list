@@ -23,3 +23,10 @@
   opacity: 1;
   visibility: visible;
 }
+
+@include breakpoint-down(800px) {
+  .todo-list__item-remove-button {
+    visibility: visible;
+    opacity: 1;
+  }
+}
