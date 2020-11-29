@@ -30,6 +30,8 @@ var elTodoTaskAddForm = $_('#todoTaskAddForm');
 var elTodoTaskInput = $_('#todoTaskInput', elTodoTaskAddForm);
 var elTodoList = $_('.todo-list');
 
+var elTodoTaskCounter = $_('#todoTaskCounter');
+
 var elTodoTaskTemplate = $_('#todoTaskTemplate').content;
 
 
@@ -41,7 +43,9 @@ var elTodoTaskTemplate = $_('#todoTaskTemplate').content;
 \**********************************************************/
 
 function addUserInputTasksArray(todoTask) {
-  todoTasks.push(todoTask);
+  elTodoTaskInput.value = '';
+
+  return todoTasks.push(todoTask);
 }
 
 function addTodoTasksToTasksList(tasks) {
@@ -68,6 +72,8 @@ function addTodoTasksToTasksList(tasks) {
  *
 \**********************************************************/
 
+elTodoTaskCounter.textContent = 0;
+
 elTodoTaskAddForm.addEventListener('submit', function (evt) {
   evt.preventDefault();
 
@@ -76,9 +82,8 @@ elTodoTaskAddForm.addEventListener('submit', function (evt) {
     return;
   }
 
-  addUserInputTasksArray(todoTask);
-
-  elTodoTaskInput.value = '';
+  var todoTaskCounter = addUserInputTasksArray(todoTask);
+  elTodoTaskCounter.textContent = todoTaskCounter;
 
   addTodoTasksToTasksList(todoTasks);
 });
