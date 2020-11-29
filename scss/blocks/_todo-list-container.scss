@@ -2,3 +2,8 @@
   max-width: 550px;
   background-color: #fff;
 }
+
+.todo-list-container__main {
+  max-height: 55vh;
+  overflow-y: auto;
+}
