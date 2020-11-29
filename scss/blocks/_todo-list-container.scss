@@ -10,12 +10,18 @@
 
 @include breakpoint-down(1024px) {
   .todo-list-container__main {
-    max-height: 45vh;
+    max-height: 55vh;
   }
 }
 
 @include breakpoint-down(800px) {
   .todo-list-container__main {
     max-height: 50vh;
+  }
+}
+
+@include breakpoint-down(400px) {
+  .todo-list-container__main {
+    max-height: 45vh;
   }
 }
