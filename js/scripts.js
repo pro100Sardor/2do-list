@@ -45,7 +45,7 @@ function createTodoTask(id, content) {
   return {
     id: id,
     content: content,
-    status: "unfulfilled"
+    status: 'unfulfilled'
   }
 }
 
@@ -62,8 +62,11 @@ function addTodoTasksToTasksList(tasks) {
     var elTask = elTodoTaskTemplate.cloneNode(true);
 
     $_('.js-todo-list-item', elTask).dataset.todoListItemId = task.id;
-    $_('.js-todo-task-text', elTask).textContent = task.content;
-
+    if (task.status === 'fulfilled') {
+      $_('.js-todo-task-text', elTask).innerHTML = `<del>${task.content}</del>`;
+    } else {
+      $_('.js-todo-task-text', elTask).innerHTML = task.content;
+    }
     elTodoTasksFragment.appendChild(elTask);
   });
 
@@ -110,5 +113,18 @@ elTodoList.addEventListener('click', (evt) => {
     addTodoTasksToTasksList(todoTasks);
 
     elTodoTaskCounter.textContent = todoTasks.length;
+  } else if (evt.target.matches('.js-todo-item-status-button')) {
+
+    var elTodoListItemId = evt.target.closest('.js-todo-list-item').dataset.todoListItemId;
+
+    var todoTaskIndex = todoTasks.findIndex( todoTaskIndex => todoTaskIndex.id === elTodoListItemId );
+
+    todoTasks[todoTaskIndex].status = 'fulfilled';
+
+    debugger;
+
+    addTodoTasksToTasksList(todoTasks);
+
+    console.log(todoTasks);
   }
 });
