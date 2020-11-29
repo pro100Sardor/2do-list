@@ -19,9 +19,15 @@
   display: none;
 }
 
-@include breakpoint-down(500px) {
+@include breakpoint-down(800px) {
   .page__title {
     font-size: 4rem;
+  }
+}
+
+@include breakpoint-down(500px) {
+  .page__title {
+    font-size: 3.5rem;
   }
 }
 
