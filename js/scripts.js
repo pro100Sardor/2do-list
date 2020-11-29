@@ -113,18 +113,20 @@ elTodoList.addEventListener('click', (evt) => {
     addTodoTasksToTasksList(todoTasks);
 
     elTodoTaskCounter.textContent = todoTasks.length;
-  } else if (evt.target.matches('.js-todo-item-status-button')) {
-
+  } else if (evt.target.matches('.js-todo-item-status-controller')) {
     var elTodoListItemId = evt.target.closest('.js-todo-list-item').dataset.todoListItemId;
 
     var todoTaskIndex = todoTasks.findIndex( todoTaskIndex => todoTaskIndex.id === elTodoListItemId );
 
-    todoTasks[todoTaskIndex].status = 'fulfilled';
-
-    debugger;
+    console.log(evt.target.previousElementSibling.checked);
+    if (evt.target.previousElementSibling.checked) {
+      console.log('if');
+      todoTasks[todoTaskIndex].status = 'fulfilled';
+    } else {
+      console.log('else');
+      todoTasks[todoTaskIndex].status = 'unfulfilled';
+    }
 
     addTodoTasksToTasksList(todoTasks);
-
-    console.log(todoTasks);
   }
 });
