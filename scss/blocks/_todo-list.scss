@@ -24,6 +24,10 @@
   visibility: visible;
 }
 
+.todo-list-container__todo-task-counter {
+  font-size: 18px;
+}
+
 @include breakpoint-down(800px) {
   .todo-list__item-remove-button {
     visibility: visible;
