@@ -28,7 +28,6 @@ var todoTasks = [];
 var elTodoTaskAddForm = $_('#todoTaskAddForm');
 var elTodoTaskInput = $_('#todoTaskInput', elTodoTaskAddForm);
 var elTodoList = $_('#todoList');
-var elTodoListItem = $_('.js-todo-list-item', elTodoList);
 
 var elTodoTaskCounter = $_('#todoTaskCounter');
 
@@ -51,7 +50,7 @@ function createTodoTask(id, content) {
 }
 
 function addUserInputTasksArray(todoTask) {
-  var todoTaskID = todoTasks.length + 1;
+  var todoTaskID = (todoTasks.length + 1).toString();
   todoTasks.push(createTodoTask(todoTaskID, todoTask));
   elTodoTaskInput.value = '';
 }
@@ -62,6 +61,7 @@ function addTodoTasksToTasksList(tasks) {
   tasks.forEach(function (task) {
     var elTask = elTodoTaskTemplate.cloneNode(true);
 
+    $_('.js-todo-list-item', elTask).dataset.todoListItemId = task.id;
     $_('.js-todo-task-text', elTask).textContent = task.content;
 
     elTodoTasksFragment.appendChild(elTask);
@@ -97,8 +97,18 @@ elTodoTaskAddForm.addEventListener('submit', (evt) => {
   addTodoTasksToTasksList(todoTasks);
 });
 
-elTodoListItem.addEventListener('click', (evt) => {
-  if (evt.target.matches('js-todo-item-remove-button')) {
 
+elTodoList.addEventListener('click', (evt) => {
+  if (evt.target.matches('.js-todo-item-remove-button')) {
+
+    var elTodoListItemId = evt.target.closest('.js-todo-list-item').dataset.todoListItemId;
+
+    var todoTaskIndex = todoTasks.findIndex( todoTaskIndex => todoTaskIndex.id === elTodoListItemId );
+
+    todoTasks.splice(todoTaskIndex, 1);
+
+    addTodoTasksToTasksList(todoTasks);
+
+    elTodoTaskCounter.textContent = todoTasks.length;
   }
 });
