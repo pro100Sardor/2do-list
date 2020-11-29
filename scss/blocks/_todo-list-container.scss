@@ -7,3 +7,9 @@
   max-height: 55vh;
   overflow-y: auto;
 }
+
+@include breakpoint-down(1024px) {
+  .todo-list-container__main {
+    max-height: 45vh;
+  }
+}
