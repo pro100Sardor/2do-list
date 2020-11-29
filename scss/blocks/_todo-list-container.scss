@@ -13,3 +13,9 @@
     max-height: 45vh;
   }
 }
+
+@include breakpoint-down(800px) {
+  .todo-list-container__main {
+    max-height: 40vh;
+  }
+}
