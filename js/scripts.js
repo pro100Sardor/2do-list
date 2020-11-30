@@ -1,6 +1,6 @@
 /**********************************************************************************\
   *
-  *  Briefly about the contents of the file
+  * Briefly about the contents of the file
   *
   * The code consists of three main sections:
   *
@@ -25,6 +25,8 @@
 
 var todoTasks = [];
 
+var todoTaskIdCounter = Number(localStorage.getItem('todoTaskIdCounter'));
+
 var elTodoTaskAddForm = $_('#todoTaskAddForm');
 var elTodoTaskInput = $_('#todoTaskInput', elTodoTaskAddForm);
 
@@ -42,15 +44,21 @@ var elTodoTaskTemplate = $_('#todoTaskTemplate').content;
  *
 \**********************************************************/
 
+var updateLocalStorageCounter = function () {
+  localStorage.setItem('todoTaskIdCounter', todoTaskIdCounter);
+};
+
 function addUserInputTasksArray(todoTask) {
-  var todoTaskID = (todoTasks.length + 1).toString();
   todoTasks.push(
     {
-      id: todoTaskID,
+      id: ++todoTaskIdCounter,
       content: todoTask,
       complated: false
     }
   );
+
+  updateLocalStorageCounter();
+
   elTodoTaskInput.value = '';
 }
 
@@ -111,7 +119,7 @@ elTodoList.addEventListener('click', (evt) => {
 
     var elTodoListItemId = evt.target.closest('.js-todo-list-item').dataset.todoListItemId;
 
-    var todoTaskIndex = todoTasks.findIndex( todoTaskIndex => todoTaskIndex.id === elTodoListItemId );
+    var todoTaskIndex = todoTasks.findIndex( todoTaskIndex => todoTaskIndex.id == elTodoListItemId );
 
     todoTasks.splice(todoTaskIndex, 1);
 
@@ -121,7 +129,7 @@ elTodoList.addEventListener('click', (evt) => {
   } else if (evt.target.matches('.js-todo-item-status-controller')) {
     var elTodoListItemId = evt.target.closest('.js-todo-list-item').dataset.todoListItemId;
 
-    var todoTaskIndex = todoTasks.findIndex( todoTaskIndex => todoTaskIndex.id === elTodoListItemId );
+    var todoTaskIndex = todoTasks.findIndex( todoTaskIndex => todoTaskIndex.id == elTodoListItemId );
 
     if (!(evt.target.parentNode.previousElementSibling.checked)) {
       todoTasks[todoTaskIndex].complated = true;
