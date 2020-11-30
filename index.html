@@ -73,11 +73,15 @@
   <template id="todoTaskTemplate">
     <li class="todo-list__item d-flex p-2 border-bottom align-items-center js-todo-list-item">
       <input class="todo-list__item-status-checkbox sr-only js-todo-item-status-checkbox" type="checkbox">
+
       <label class="todo-list__item-status-controller-label mb-0 js-todo-item-status-controller-label">
         <span class="todo-list__item-status-controller btn btn-sm mr-2 rounded-circle js-todo-item-status-controller">&#10003;</span>
       </label>
-      <!-- <button class="todo-list__item-status-button btn btn-outline-success btn-sm rounded-circle text-white mr-2 js-todo-item-status-button">&#10003;</button> -->
-      <span class="todo-list__item-text flex-grow-1 mr-2 rounded p-2 js-todo-task-text" contenteditable="true" spellcheck="false">first task</span>
+
+      <span class="todo-list__item-text flex-grow-1 mr-2 rounded p-2 js-todo-task-text" contenteditable="true" spellcheck="false">
+        <!-- Todo task content will be here -->
+      </span>
+
       <button class="todo-list__item-remove-button btn text-danger js-todo-item-remove-button">&#10060;</button>
     </li>
   </template>

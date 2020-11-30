@@ -1,8 +1,8 @@
 .todo-list__item-status-controller {
-  border-color: #e6e6e6;
+  border-color: #ccc;
   background-color: #fff;
   font-size: 30px;
-  color: #e6e6e6;
+  color: #ccc;
   line-height: 30px;
   padding: {
     top: 1px;
@@ -30,10 +30,17 @@
 .todo-list__item-text {
   line-height: 25px;
   word-break: break-all;
+  font-weight: 500;
   &:focus {
     outline: none;
     box-shadow: 0 0 3px 1px #e6e6e6;
   }
+  transition: color 0.2s ease;
+}
+
+.todo-list__item-status-checkbox:checked + .todo-list__item-status-controller-label +
+.todo-list__item-text {
+  color: #ccc!important;
 }
 
 .todo-list__item-remove-button {

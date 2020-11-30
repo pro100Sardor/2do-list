@@ -68,7 +68,7 @@ function addTodoTasksToTasksList(tasks) {
 
     $_('.js-todo-list-item', elTask).dataset.todoListItemId = task.id;
     if (task.complated) {
-      $_('.js-todo-task-text', elTask).innerHTML = `<del class="text-muted">${task.content}</del>`;
+      $_('.js-todo-task-text', elTask).innerHTML = `<del class="">${task.content}</del>`;
     } else {
       $_('.js-todo-task-text', elTask).innerHTML = task.content;
     }
@@ -123,13 +123,10 @@ elTodoList.addEventListener('click', (evt) => {
 
     var todoTaskIndex = todoTasks.findIndex( todoTaskIndex => todoTaskIndex.id === elTodoListItemId );
 
-    console.log(evt.target.previousElementSibling.checked);
-    if (evt.target.previousElementSibling.checked) {
-      console.log('if');
-      todoTasks[todoTaskIndex].status = 'fulfilled';
+    if (!(evt.target.parentNode.previousElementSibling.checked)) {
+      todoTasks[todoTaskIndex].complated = true;
     } else {
-      console.log('else');
-      todoTasks[todoTaskIndex].status = 'unfulfilled';
+      todoTasks[todoTaskIndex].complated = false;
     }
 
     addTodoTasksToTasksList(todoTasks);
