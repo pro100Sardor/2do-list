@@ -27,6 +27,7 @@ var todoTasks = [];
 
 var elTodoTaskAddForm = $_('#todoTaskAddForm');
 var elTodoTaskInput = $_('#todoTaskInput', elTodoTaskAddForm);
+
 var elTodoList = $_('#todoList');
 
 var elTodoTaskCounter = $_('#todoTaskCounter');
@@ -41,17 +42,15 @@ var elTodoTaskTemplate = $_('#todoTaskTemplate').content;
  *
 \**********************************************************/
 
-function createTodoTask(id, content) {
-  return {
-    id: id,
-    content: content,
-    status: 'unfulfilled'
-  }
-}
-
 function addUserInputTasksArray(todoTask) {
   var todoTaskID = (todoTasks.length + 1).toString();
-  todoTasks.push(createTodoTask(todoTaskID, todoTask));
+  todoTasks.push(
+    {
+      id: todoTaskID,
+      content: todoTask,
+      complated: false
+    }
+  );
   elTodoTaskInput.value = '';
 }
 
@@ -61,9 +60,15 @@ function addTodoTasksToTasksList(tasks) {
   tasks.forEach(function (task) {
     var elTask = elTodoTaskTemplate.cloneNode(true);
 
+    var elTodoItemStatusCheckbox = $_('.js-todo-item-status-checkbox', elTask);
+    elTodoItemStatusCheckbox.checked = task.complated;
+    elTodoItemStatusCheckbox.id = `todoTask${task.id}`;
+
+    $_('.js-todo-item-status-controller-label', elTask).setAttribute('for', `todoTask${task.id}`)
+
     $_('.js-todo-list-item', elTask).dataset.todoListItemId = task.id;
-    if (task.status === 'fulfilled') {
-      $_('.js-todo-task-text', elTask).innerHTML = `<del>${task.content}</del>`;
+    if (task.complated) {
+      $_('.js-todo-task-text', elTask).innerHTML = `<del class="text-muted">${task.content}</del>`;
     } else {
       $_('.js-todo-task-text', elTask).innerHTML = task.content;
     }

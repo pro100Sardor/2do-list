@@ -9,6 +9,10 @@
   overflow-y: auto;
 }
 
+.todo-list-container__form-input::placeholder {
+  color: #ccc;
+}
+
 @include breakpoint-down(800px) {
   .todo-list-container__main {
     max-height: 50vh;
