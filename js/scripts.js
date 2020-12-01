@@ -34,6 +34,10 @@ var elTodoTaskInput = $_('#todoTaskInput', elTodoTaskAddForm);
 
 var elTodoList = $_('#todoList');
 
+var elAllTodosShowButton = $_(".js-all-todos-show-button");
+var elActiveTodosShowButton = $_(".js-active-todos-show-button");
+var elCompletedTodosShowButton = $_(".js-completed-todos-show-button");
+
 var elTodoTaskCounter = $_('#todoTaskCounter');
 
 var elTodoTaskTemplate = $_('#todoTaskTemplate').content;
@@ -68,6 +72,69 @@ function addUserInputTasksArray(todoTask) {
   checkAllTasksComplated();
 
   elTodoTaskInput.value = '';
+}
+
+function addTodoTasksToTasksList(tasks) {
+  var elTodoTasksFragment = document.createDocumentFragment();
+
+  tasks.forEach(function (task) {
+    var elTask = elTodoTaskTemplate.cloneNode(true);
+
+    var elTodoItemStatusCheckbox = $_('.js-todo-item-status-checkbox', elTask);
+    elTodoItemStatusCheckbox.checked = task.completed;
+    elTodoItemStatusCheckbox.id = `todoTask${task.id}`;
+
+    $_('.js-todo-item-status-controller-label', elTask).setAttribute('for', `todoTask${task.id}`)
+
+    $_('.js-todo-list-item', elTask).dataset.todoListItemId = task.id;
+    if (task.completed) {
+      $_('.js-todo-task-text', elTask).innerHTML = `<del class="">${task.content}</del>`;
+    } else {
+      $_('.js-todo-task-text', elTask).innerHTML = task.content;
+    }
+    elTodoTasksFragment.appendChild(elTask);
+  });
+
+  updateLocalStorageTodoTasks();
+
+  elTodoList.innerHTML = '';
+
+  elTodoList.appendChild(elTodoTasksFragment);
+}
+
+function addCompletedOrActiveTasksToTasksList(complatedOrActive) {
+  var filteredTodos = [];
+  if (complatedOrActive === 'active') {
+    filteredTodos = todoTasks.filter(todoTask => todoTask.completed === false);
+  } else if (complatedOrActive === 'completed') {
+    filteredTodos = todoTasks.filter(todoTask => todoTask.completed === true);
+  }
+
+  var elTodoTasksFragment = document.createDocumentFragment();
+
+  filteredTodos.forEach(function (task) {
+    var elTask = elTodoTaskTemplate.cloneNode(true);
+
+    var elTodoItemStatusCheckbox = $_('.js-todo-item-status-checkbox', elTask);
+    elTodoItemStatusCheckbox.checked = task.completed;
+    elTodoItemStatusCheckbox.id = `todoTask${task.id}`;
+
+    $_('.js-todo-item-status-controller-label', elTask).setAttribute('for', `todoTask${task.id}`)
+
+    $_('.js-todo-list-item', elTask).dataset.todoListItemId = task.id;
+    if (task.completed) {
+      $_('.js-todo-task-text', elTask).innerHTML = `<del class="">${task.content}</del>`;
+    } else {
+      $_('.js-todo-task-text', elTask).innerHTML = task.content;
+    }
+    elTodoTasksFragment.appendChild(elTask);
+  });
+
+  updateLocalStorageTodoTasks();
+
+  elTodoList.innerHTML = '';
+
+  elTodoList.appendChild(elTodoTasksFragment);
 }
 
 function addTodoTasksToTasksList(tasks) {
@@ -196,4 +263,16 @@ elAllTodoTaskComplatedController.addEventListener('click', function (evt) {
 
     elTodoTaskCounter.textContent = determineUncompletedTasksCount();
   }
+});
+
+elAllTodosShowButton.addEventListener('click', function (evt) {
+  addTodoTasksToTasksList(todoTasks);
+});
+
+elActiveTodosShowButton.addEventListener('click', function (evt) {
+  addCompletedOrActiveTasksToTasksList(elActiveTodosShowButton.value);
+});
+
+elCompletedTodosShowButton.addEventListener('click', function (evt) {
+  addCompletedOrActiveTasksToTasksList(elCompletedTodosShowButton.value);
 });
