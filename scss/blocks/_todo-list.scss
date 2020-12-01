@@ -35,6 +35,12 @@
   line-height: 30px;
 }
 
+.todo-list__items-status-checkbox:checked + .todo-list__items-status-controller-label > .todo-list__items-status-controller {
+  background-color: #00bb4a;
+  border-color: #00bb4a;
+  color: #fff;
+}
+
 .todo-list__item-status-checkbox:checked + .todo-list__item-status-controller-label > .todo-list__item-status-controller {
   background-color: #00bb4a;
   border-color: #00bb4a;
