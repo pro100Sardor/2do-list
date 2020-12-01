@@ -57,7 +57,7 @@ function addUserInputTasksArray(todoTask) {
     {
       id: ++todoTaskIdCounter,
       content: todoTask,
-      complated: false
+      completed: false
     }
   );
 
@@ -74,13 +74,13 @@ function addTodoTasksToTasksList(tasks) {
     var elTask = elTodoTaskTemplate.cloneNode(true);
 
     var elTodoItemStatusCheckbox = $_('.js-todo-item-status-checkbox', elTask);
-    elTodoItemStatusCheckbox.checked = task.complated;
+    elTodoItemStatusCheckbox.checked = task.completed;
     elTodoItemStatusCheckbox.id = `todoTask${task.id}`;
 
     $_('.js-todo-item-status-controller-label', elTask).setAttribute('for', `todoTask${task.id}`)
 
     $_('.js-todo-list-item', elTask).dataset.todoListItemId = task.id;
-    if (task.complated) {
+    if (task.completed) {
       $_('.js-todo-task-text', elTask).innerHTML = `<del class="">${task.content}</del>`;
     } else {
       $_('.js-todo-task-text', elTask).innerHTML = task.content;
@@ -95,6 +95,18 @@ function addTodoTasksToTasksList(tasks) {
   elTodoList.appendChild(elTodoTasksFragment);
 }
 
+function determineUncompletedTasksCount() {
+  var uncompletedTasksCount = 0;
+
+  todoTasks.forEach(function (todoTask) {
+    if (!todoTask.completed) {
+      uncompletedTasksCount++
+    }
+  });
+
+  return uncompletedTasksCount;
+}
+
 
 
 /**********************************************************\
@@ -105,7 +117,7 @@ function addTodoTasksToTasksList(tasks) {
 
 addTodoTasksToTasksList(todoTasks);
 
-elTodoTaskCounter.textContent = todoTasks.length;
+elTodoTaskCounter.textContent = determineUncompletedTasksCount();
 
 elTodoTaskAddForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
@@ -117,7 +129,7 @@ elTodoTaskAddForm.addEventListener('submit', (evt) => {
 
   addUserInputTasksArray(todoTask);
 
-  elTodoTaskCounter.textContent = todoTasks.length;
+  elTodoTaskCounter.textContent = determineUncompletedTasksCount();
 
   addTodoTasksToTasksList(todoTasks);
 });
@@ -134,18 +146,20 @@ elTodoList.addEventListener('click', (evt) => {
 
     addTodoTasksToTasksList(todoTasks);
 
-    elTodoTaskCounter.textContent = todoTasks.length;
+    elTodoTaskCounter.textContent = determineUncompletedTasksCount();
   } else if (evt.target.matches('.js-todo-item-status-controller')) {
     var elTodoListItemId = evt.target.closest('.js-todo-list-item').dataset.todoListItemId;
 
     var todoTaskIndex = todoTasks.findIndex( todoTaskIndex => todoTaskIndex.id == elTodoListItemId );
 
     if (!(evt.target.parentNode.previousElementSibling.checked)) {
-      todoTasks[todoTaskIndex].complated = true;
+      todoTasks[todoTaskIndex].completed = true;
     } else {
-      todoTasks[todoTaskIndex].complated = false;
+      todoTasks[todoTaskIndex].completed = false;
     }
 
     addTodoTasksToTasksList(todoTasks);
+
+    elTodoTaskCounter.textContent = determineUncompletedTasksCount();
   }
 });
