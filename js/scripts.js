@@ -23,7 +23,7 @@
  *
 \**********************************************************/
 
-var todoTasks = [];
+var todoTasks = JSON.parse(localStorage.getItem('todoTasks')) || [];
 
 var todoTaskIdCounter = Number(localStorage.getItem('todoTaskIdCounter'));
 
@@ -44,9 +44,13 @@ var elTodoTaskTemplate = $_('#todoTaskTemplate').content;
  *
 \**********************************************************/
 
-var updateLocalStorageCounter = function () {
+function updateLocalStorageCounter() {
   localStorage.setItem('todoTaskIdCounter', todoTaskIdCounter);
-};
+}
+
+function updateLocalStorageTodoTasks() {
+  localStorage.setItem('todoTasks', JSON.stringify(todoTasks));
+}
 
 function addUserInputTasksArray(todoTask) {
   todoTasks.push(
@@ -58,6 +62,7 @@ function addUserInputTasksArray(todoTask) {
   );
 
   updateLocalStorageCounter();
+  updateLocalStorageTodoTasks();
 
   elTodoTaskInput.value = '';
 }
@@ -83,6 +88,8 @@ function addTodoTasksToTasksList(tasks) {
     elTodoTasksFragment.appendChild(elTask);
   });
 
+  updateLocalStorageTodoTasks();
+
   elTodoList.innerHTML = '';
 
   elTodoList.appendChild(elTodoTasksFragment);
@@ -96,7 +103,9 @@ function addTodoTasksToTasksList(tasks) {
  *
 \**********************************************************/
 
-elTodoTaskCounter.textContent = 0;
+addTodoTasksToTasksList(todoTasks);
+
+elTodoTaskCounter.textContent = todoTasks.length;
 
 elTodoTaskAddForm.addEventListener('submit', (evt) => {
   evt.preventDefault();
