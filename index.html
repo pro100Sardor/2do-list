@@ -33,10 +33,10 @@
         <form id="todoTaskAddForm" class="p-2" action="https://echo.htmlacademy.ru" method="POST" autocomplete="off">
           <div class="form-row">
             <div class="col-1">
-              <input class="todo-list__items-status-checkbox js-todo-items-status-checkbox" type="checkbox">
+              <input class="todo-list__items-status-checkbox sr-only js-todo-items-status-checkbox" type="checkbox" id="todoListItemsStatusCheckbox">
 
-              <label class="todo-list__items-status-controller-label mb-0 js-todo-items-status-controller-label">
-                <span class="todo-list__items-status-controller btn rounded-circle js-todo-items-status-controller">&#10097;</span>
+              <label class="todo-list__items-status-controller-label mb-0 js-todo-items-status-controller-label" for="todoListItemsStatusCheckbox">
+                <span class="todo-list__items-status-controller btn rounded-circle" id="allTodoTaskComplatedController">&#10097;</span>
               </label>
             </div>
 

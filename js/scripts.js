@@ -28,6 +28,8 @@ var todoTasks = JSON.parse(localStorage.getItem('todoTasks')) || [];
 var todoTaskIdCounter = Number(localStorage.getItem('todoTaskIdCounter'));
 
 var elTodoTaskAddForm = $_('#todoTaskAddForm');
+var elTodoListItemsStatusCheckbox = $_('#todoListItemsStatusCheckbox', elTodoTaskAddForm);
+var elAllTodoTaskComplatedController = $_('#allTodoTaskComplatedController', elTodoTaskAddForm);
 var elTodoTaskInput = $_('#todoTaskInput', elTodoTaskAddForm);
 
 var elTodoList = $_('#todoList');
@@ -63,6 +65,7 @@ function addUserInputTasksArray(todoTask) {
 
   updateLocalStorageCounter();
   updateLocalStorageTodoTasks();
+  checkAllTasksComplated();
 
   elTodoTaskInput.value = '';
 }
@@ -105,6 +108,14 @@ function determineUncompletedTasksCount() {
   });
 
   return uncompletedTasksCount;
+}
+
+function checkAllTasksComplated() {
+  if (todoTasks.some(todoTask => todoTask.completed === false)) {
+    elTodoListItemsStatusCheckbox.checked = false;
+  } else if (todoTasks.every(todoTask => todoTask.completed === true)){
+    elTodoListItemsStatusCheckbox.checked = true;
+  }
 }
 
 
@@ -154,9 +165,32 @@ elTodoList.addEventListener('click', (evt) => {
 
     if (!(evt.target.parentNode.previousElementSibling.checked)) {
       todoTasks[todoTaskIndex].completed = true;
+      checkAllTasksComplated();
     } else {
       todoTasks[todoTaskIndex].completed = false;
+      checkAllTasksComplated();
     }
+
+    addTodoTasksToTasksList(todoTasks);
+
+    elTodoTaskCounter.textContent = determineUncompletedTasksCount();
+  }
+});
+
+elAllTodoTaskComplatedController.addEventListener('click', function (evt) {
+  var elTodoItemsStatusControllerLabel = evt.target.closest('.js-todo-items-status-controller-label');
+  if (!elTodoItemsStatusControllerLabel.previousElementSibling.checked) {
+    todoTasks.forEach(todoTask => {
+      todoTask.completed = true;
+    });
+
+    addTodoTasksToTasksList(todoTasks);
+
+    elTodoTaskCounter.textContent = determineUncompletedTasksCount();
+  } else if (elTodoItemsStatusControllerLabel.previousElementSibling.checked) {
+    todoTasks.forEach(todoTask => {
+      todoTask.completed = false;
+    });
 
     addTodoTasksToTasksList(todoTasks);
 
