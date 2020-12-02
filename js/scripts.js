@@ -96,8 +96,6 @@ function addTodoTasksToTasksList(tasks) {
     elTodoTasksFragment.appendChild(elTask);
   });
 
-  // updateLocalStorageTodoTasks();
-
   elTodoList.innerHTML = '';
 
   elTodoList.appendChild(elTodoTasksFragment);
@@ -130,8 +128,6 @@ function addCompletedOrActiveTasksToTasksList(complatedOrActive) {
     }
     elTodoTasksFragment.appendChild(elTask);
   });
-
-  updateLocalStorageTodoTasks();
 
   elTodoList.innerHTML = '';
 
