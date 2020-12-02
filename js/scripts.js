@@ -33,7 +33,7 @@ var elAllTodoTaskComplatedController = $_('#allTodoTaskComplatedController', elT
 var elTodoTaskInput = $_('#todoTaskInput', elTodoTaskAddForm);
 
 var elTodoList = $_('#todoList');
-
+var elTodoItemsStatusCheckbox = $_('.js-todo-items-status-checkbox');
 var elAllTodosShowButton = $_('.js-all-todos-show-button');
 var elActiveTodosShowButton = $_('.js-active-todos-show-button');
 var elCompletedTodosShowButton = $_('.js-completed-todos-show-button');
@@ -227,6 +227,11 @@ elTodoList.addEventListener('click', (evt) => {
 
     todoTasks.splice(todoTaskIndex, 1);
 
+    if (!todoTasks.length) {
+      elTodoItemsStatusCheckbox.checked = false;
+    }
+
+    updateLocalStorageTodoTasks();
     addTodoTasksToTasksList(todoTasks);
 
     elTodoTaskCounter.textContent = determineUncompletedTasksCount();
