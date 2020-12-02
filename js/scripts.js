@@ -34,9 +34,10 @@ var elTodoTaskInput = $_('#todoTaskInput', elTodoTaskAddForm);
 
 var elTodoList = $_('#todoList');
 
-var elAllTodosShowButton = $_(".js-all-todos-show-button");
-var elActiveTodosShowButton = $_(".js-active-todos-show-button");
-var elCompletedTodosShowButton = $_(".js-completed-todos-show-button");
+var elAllTodosShowButton = $_('.js-all-todos-show-button');
+var elActiveTodosShowButton = $_('.js-active-todos-show-button');
+var elCompletedTodosShowButton = $_('.js-completed-todos-show-button');
+var elDeleteComplatedTaskButton = $_('.js-delete-complated-task-button');
 
 var elTodoTaskCounter = $_('#todoTaskCounter');
 
@@ -88,14 +89,14 @@ function addTodoTasksToTasksList(tasks) {
 
     $_('.js-todo-list-item', elTask).dataset.todoListItemId = task.id;
     if (task.completed) {
-      $_('.js-todo-task-text', elTask).innerHTML = `<del class="">${task.content}</del>`;
+      $_('.js-todo-task-text', elTask).innerHTML = `<del class=''>${task.content}</del>`;
     } else {
       $_('.js-todo-task-text', elTask).innerHTML = task.content;
     }
     elTodoTasksFragment.appendChild(elTask);
   });
 
-  updateLocalStorageTodoTasks();
+  // updateLocalStorageTodoTasks();
 
   elTodoList.innerHTML = '';
 
@@ -123,7 +124,7 @@ function addCompletedOrActiveTasksToTasksList(complatedOrActive) {
 
     $_('.js-todo-list-item', elTask).dataset.todoListItemId = task.id;
     if (task.completed) {
-      $_('.js-todo-task-text', elTask).innerHTML = `<del class="">${task.content}</del>`;
+      $_('.js-todo-task-text', elTask).innerHTML = `<del class=''>${task.content}</del>`;
     } else {
       $_('.js-todo-task-text', elTask).innerHTML = task.content;
     }
@@ -151,14 +152,14 @@ function addTodoTasksToTasksList(tasks) {
 
     $_('.js-todo-list-item', elTask).dataset.todoListItemId = task.id;
     if (task.completed) {
-      $_('.js-todo-task-text', elTask).innerHTML = `<del class="">${task.content}</del>`;
+      $_('.js-todo-task-text', elTask).innerHTML = `<del class=''>${task.content}</del>`;
     } else {
       $_('.js-todo-task-text', elTask).innerHTML = task.content;
     }
     elTodoTasksFragment.appendChild(elTask);
   });
 
-  updateLocalStorageTodoTasks();
+  // updateLocalStorageTodoTasks();
 
   elTodoList.innerHTML = '';
 
@@ -183,6 +184,10 @@ function checkAllTasksComplated() {
   } else if (todoTasks.every(todoTask => todoTask.completed === true)){
     elTodoListItemsStatusCheckbox.checked = true;
   }
+}
+
+function delateCompletedTask() {
+  todoTasks = todoTasks.filter(todoTask => todoTask.completed === false);
 }
 
 
@@ -275,4 +280,10 @@ elActiveTodosShowButton.addEventListener('click', function (evt) {
 
 elCompletedTodosShowButton.addEventListener('click', function (evt) {
   addCompletedOrActiveTasksToTasksList(elCompletedTodosShowButton.value);
+});
+
+elDeleteComplatedTaskButton.addEventListener('click', function (evt) {
+  delateCompletedTask();
+  updateLocalStorageTodoTasks();
+  addTodoTasksToTasksList(todoTasks);
 });
